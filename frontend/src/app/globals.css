@@ -1,15 +1,23 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f5f4f0;
+  --background: #fdfdfc;
   --foreground: #1c1917;
   --surface: #ffffff;
   --muted: #78716c;
+  --accent: #0d9488; /* Teal-600 */
+  --accent-light: #f0fdfa; /* Teal-50 */
+  --border: #e7e5e4; /* Stone-200 */
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.4);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-accent: var(--accent);
+  --color-accent-light: var(--accent-light);
+  --color-border-subtle: var(--border);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
@@ -20,6 +28,11 @@
     --foreground: #fafaf9;
     --surface: #1c1917;
     --muted: #a8a29e;
+    --accent: #2dd4bf; /* Teal-400 */
+    --accent-light: #0d2e2c; /* Teal-950/20 */
+    --border: #292524; /* Stone-800 */
+    --glass-bg: rgba(28, 25, 23, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.1);
   }
 }
 
@@ -69,6 +82,44 @@ body::before {
     animation: none;
     opacity: 0.75;
   }
+}
+
+/* Premium Glassmorphism */
+.glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  border: 1px solid var(--glass-border);
+}
+
+/* Smooth motion */
+.hover-lift {
+  transition: transform 0.2s cubic-bezier(0.33, 1, 0.68, 1), box-shadow 0.2s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px -10px rgba(0, 0, 0, 0.1);
+}
+
+/* Accent Glow */
+.accent-glow {
+  position: relative;
+}
+
+.accent-glow::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  background: linear-gradient(45deg, var(--accent), transparent, var(--accent));
+  z-index: -1;
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.accent-glow:hover::after {
+  opacity: 0.15;
 }
 
 /* Session chat: nearly invisible scrollbar; slightly stronger on hover */

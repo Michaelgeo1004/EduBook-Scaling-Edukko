@@ -4,14 +4,22 @@ export function UiCard({
   children,
   className = "",
   padding = "p-6",
+  variant = "default",
 }: {
   children: ReactNode;
   className?: string;
   padding?: string;
+  variant?: "default" | "glass" | "outline";
 }) {
+  const variants = {
+    default: "bg-surface border-border-subtle shadow-sm hover-lift",
+    glass: "glass-panel shadow-lg hover-lift",
+    outline: "bg-transparent border-border-subtle shadow-none",
+  };
+
   return (
     <div
-      className={`rounded-2xl border border-stone-200/80 bg-white shadow-sm shadow-stone-900/5 dark:border-stone-700/80 dark:bg-stone-900 dark:shadow-black/30 ${padding} ${className}`}
+      className={`rounded-2xl border transition-all duration-300 ${variants[variant]} ${padding} ${className}`}
     >
       {children}
     </div>
